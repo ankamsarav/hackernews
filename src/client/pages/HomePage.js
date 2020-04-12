@@ -4,9 +4,8 @@ import React, { useState, useEffect } from 'react';
 import { useDispatch, connect } from 'react-redux';
 import PropTypes from 'prop-types'; // ES6
 import fetchTopNews from '../actions';
-import extractHostname from '../utils';
-import { GreySmallTxt, SmallBox, PointsBox, Logo, UpArrowIcon } from './styled';
-import TimeAgo from '../components/TimeAgo';
+import { Logo, StyledNewsList } from '../components/styled';
+import NewsItem from '../components/NewsItem';
 
 const HomePage = props => {
   const [page, setPage] = useState(0);
@@ -14,37 +13,7 @@ const HomePage = props => {
   const renderNews = () => {
     return (
       props.news &&
-      props.news.map((news, index) => (
-        <div
-          className="col l12"
-          style={{
-            background: index % 2 === 0 ? 'e6e6df' : '#f6f6ef',
-            padding: '5px 0 5px 5px',
-            display: 'flex'
-          }}
-          key={news.title}
-        >
-          <div style={{ width: '85px', display: 'flex', paddingTop: '4px' }}>
-            <SmallBox>{news.num_comments}</SmallBox>
-            <PointsBox>
-              {news.points}
-              <UpArrowIcon />
-            </PointsBox>
-          </div>
-          <div style={{ display: 'inline-block' }}>
-            <span style={{ fontSize: '14px' }}>{news.title}</span>
-            <GreySmallTxt>
-              <a href={news.url} target="_blank">{` (${extractHostname(news.url)})`}</a>
-            </GreySmallTxt>
-            <GreySmallTxt> by </GreySmallTxt>
-            <span style={{ fontSize: '11px', paddingRight: '5px' }}>{news.author}</span>
-            <GreySmallTxt>
-              <TimeAgo time={news.created_at_i} />
-            </GreySmallTxt>
-            <span style={{ fontSize: '11px' }}> [Hide]</span>
-          </div>
-        </div>
-      ))
+      props.news.map((news, index) => <NewsItem news={news} index={index} key={news.objectID} />)
     );
   };
 
@@ -61,9 +30,7 @@ const HomePage = props => {
         <span>Top | New</span>
       </header>
       <div className="row">
-        <div>
-          <div>{renderNews()}</div>
-        </div>
+        <StyledNewsList>{renderNews()}</StyledNewsList>
       </div>
       <footer>
         <span
