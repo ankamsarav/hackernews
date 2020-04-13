@@ -1,6 +1,8 @@
+/* eslint-disable jsx-a11y/interactive-supports-focus */
+/* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable no-script-url */
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { useDispatch, connect } from 'react-redux';
 import PropTypes from 'prop-types'; // ES6
 import fetchTopNews from '../actions';
