@@ -54,8 +54,8 @@ export const StyledCountWrapper = styled.div`
 `;
 
 export const Logo = styled.span`
-  width: 16px;
-  height: 20px;
+  width: 15px;
+  height: 15px;
   display: inline-block;
   border: 1px solid #fff;
   color: #fff;

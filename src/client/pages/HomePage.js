@@ -1,3 +1,5 @@
+/* eslint-disable jsx-a11y/interactive-supports-focus */
+/* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable no-script-url */
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React, { useState, useEffect } from 'react';
@@ -25,16 +27,16 @@ const HomePage = props => {
 
   return (
     <div>
-      <header style={{ background: '#ff6601', padding: '7px', fontSize: '12px' }}>
+      <header style={{ background: '#ff6601', padding: '7px', fontSize: '13px' }}>
         <Logo>Y</Logo>
         <span>Top | New</span>
       </header>
       <div className="row">
         <StyledNewsList>{renderNews()}</StyledNewsList>
       </div>
-      <footer>
+      <footer style={{ padding: '10px' }}>
         <span
-          style={{ color: '#ff6601', marginLeft: '90px', cursor: 'pointer' }}
+          style={{ color: '#ff6601', marginLeft: '80px', cursor: 'pointer' }}
           role="link"
           onClick={handlerMore}
         >

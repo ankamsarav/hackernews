@@ -4,6 +4,7 @@ import express from 'express';
 import React from 'react';
 import { matchRoutes } from 'react-router-config';
 import compression from 'compression';
+import { ServerStyleSheet } from 'styled-components';
 import renderer from './helpers/renderer';
 import createStore from './store/createStore';
 import Routes from './client/Routes';
@@ -55,7 +56,8 @@ app.get('*', (req, res) => {
   // Wait for all the loadData functions, if they are resolved, send the rendered html to browser.
   Promise.all(promises).then(() => {
     const context = {};
-    const content = renderer(req, store, context);
+    const sheet = new ServerStyleSheet();
+    const content = renderer(req, store, context, sheet);
 
     if (context.notFound) {
       res.status(404);

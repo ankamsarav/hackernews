@@ -6,18 +6,23 @@ import { renderRoutes } from 'react-router-config';
 import serialize from 'serialize-javascript';
 import Routes from '../client/Routes';
 
-export default (req, store, context) => {
+export default (req, store, context, sheet) => {
   const content = renderToString(
-    <Provider store={store}>
-      <StaticRouter location={req.path} context={context}>
-        <div>{renderRoutes(Routes)}</div>
-      </StaticRouter>
-    </Provider>
+    sheet.collectStyles(
+      <Provider store={store}>
+        <StaticRouter location={req.path} context={context}>
+          <div>{renderRoutes(Routes)}</div>
+        </StaticRouter>
+      </Provider>
+    )
   );
+  const styles = sheet.getStyleTags();
 
   return `<!DOCTYPE html>
-            <head>                
+            <head>
+                <link rel="icon" href="data:;base64,=">
                 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+                ${styles}
             </head>
             <body style='margin:0; font-family: arial'>
                 <div id="root">${content}</div>
